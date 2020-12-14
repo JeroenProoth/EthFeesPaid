@@ -1,7 +1,7 @@
 # Took https://github.com/corpetty/py-etherscan-api as a learning experience.
 
 from etherscan.account import Account
-from secret import API_KEY
+from secrets import API_KEY
 
 
 if __name__ == "__main__":
