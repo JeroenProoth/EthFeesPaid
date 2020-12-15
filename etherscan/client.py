@@ -5,43 +5,23 @@ import requests
 
 class Client():
 
-    PREFIX = 'https://api.etherscan.io/api?'
-    MODULE = '&module='
-    ACTION = '&action='
-    ADDRESS = '&address='
-    CONTRACT_ADDRESS = '&contractaddress='
-    SORT = '&sort='
-    TAG = '&tag='
-    API_KEY = '&apikey='
+    url = 'https://api.etherscan.io/api'
 
     def __init__(self, address, api_key = ''):
         # Allows persistent cookies.
         self.http = requests.session()
+        self.set_query_param(address=address, apikey=api_key)
 
-        # For constructing the URL.
-        self.url_dict = collections.OrderedDict([
-            (self.ADDRESS, address),
-            (self.CONTRACT_ADDRESS, ''),
-            (self.ACTION, ''),
-            (self.SORT, ''),
-            (self.TAG, ''),
-            (self.API_KEY, api_key),
-            ])
-
-        self.url = None
-
-
-    def build_url(self):
-        '''Creates a URL based on the values given to it in self.url_dict.'''
-        self.url = self.PREFIX + ''.join(
-            [param + val if val else '' for param, val in self.url_dict.items()]
-            )
+    def set_query_param(self, **kwargs):
+        """Sets the given query parameters."""
+        self.http.params.update(kwargs)
 
     def connect(self):
         try:
             request = self.http.get(self.url)
         except requests.exceptions.ConnectionError:
             print('Connection Refused')
+            return
 
         if request.status_code == 200:
             if request.text:
@@ -56,4 +36,4 @@ class Client():
 
 
     def show_api_key(self):
-        print(self.url_dict)
+        print(self.http.params)
