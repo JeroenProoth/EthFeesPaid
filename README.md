@@ -1,4 +1,4 @@
-# EthFeesPayed
+# EthFeesPaid
  Calculates total fees paid on Ethereum network for a given address.
  Based on [py-etherscan-api](https://github.com/corpetty/py-etherscan-api) as a small exercise for myself.
 
