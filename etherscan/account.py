@@ -24,4 +24,12 @@ class Account(Client):
         self.build_url()
         req = self.connect()
         return req['result']
-        
+
+    def get_token_balance(self, contract_address):
+        self.url_dict[self.ACTION] = 'tokenbalance'
+        self.url_dict[self.CONTRACT_ADDRESS] = contract_address
+
+        self.build_url()
+        print(self.url)
+        req = self.connect()
+        return req['result']

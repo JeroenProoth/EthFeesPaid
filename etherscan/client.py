@@ -9,6 +9,7 @@ class Client():
     MODULE = '&module='
     ACTION = '&action='
     ADDRESS = '&address='
+    CONTRACT_ADDRESS = '&contractaddress='
     SORT = '&sort='
     TAG = '&tag='
     API_KEY = '&apikey='
@@ -20,6 +21,7 @@ class Client():
         # For constructing the URL.
         self.url_dict = collections.OrderedDict([
             (self.ADDRESS, address),
+            (self.CONTRACT_ADDRESS, ''),
             (self.ACTION, ''),
             (self.SORT, ''),
             (self.TAG, ''),
