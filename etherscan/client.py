@@ -12,13 +12,13 @@ class Client():
     TAG = '&tag='
     API_KEY = '&apikey='
 
-    def __init__(self, api_key = ''):
+    def __init__(self, address, api_key = ''):
         # Allows persistent cookies.
         self.http = requests.session()
 
         # For constructing the URL.
         self.url_dict = collections.OrderedDict([
-            (self.ADDRESS, ''),
+            (self.ADDRESS, address),
             (self.ACTION, ''),
             (self.TAG, ''),
             (self.API_KEY, api_key),
