@@ -1,6 +1,6 @@
 '''Took https://github.com/corpetty/py-etherscan-api as a learning experience.'''
 
-from secrets import API_KEY, ADDRESS
+from secrets import API_KEY, ADDRESS, ADDRESS_ALT
 from calculator import Calculator
 
 if __name__ == "__main__":
