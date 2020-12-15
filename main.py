@@ -1,9 +1,8 @@
-# Took https://github.com/corpetty/py-etherscan-api as a learning experience.
+'''Took https://github.com/corpetty/py-etherscan-api as a learning experience.'''
 
+from secrets import API_KEY, ADDRESS
 from etherscan.account import Account
-from secrets import API_KEY
-
 
 if __name__ == "__main__":
-	account = Account(API_KEY = API_KEY)
-	account.show_api_key()
+    account = Account(api_key = API_KEY)
+    print(account.get_balance(ADDRESS))
