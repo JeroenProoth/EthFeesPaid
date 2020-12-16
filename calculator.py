@@ -2,12 +2,15 @@ import pandas as pd
 from etherscan.account import Account
 from etherscan.stats import Stats
 
+from ethexplorer.api_methods import ApiMethods
+
 class Calculator():
     '''Handles calculations regarding given account.'''
 
     def __init__(self, address, api_key = ''):
         self.account = Account(address, api_key = api_key)
         self.stats = Stats(api_key = api_key)
+        self.api_methods = ApiMethods()
 
 
     def calculate_total_eth_fees(self) -> tuple:
@@ -25,3 +28,6 @@ class Calculator():
         fee_in_usd = fee_in_eth * float(self.stats.get_ether_last_price()['ethusd'])
         
         return (fee_in_eth, fee_in_usd)
+
+
+        
