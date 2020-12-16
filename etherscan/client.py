@@ -1,6 +1,5 @@
 ''' Took https://github.com/corpetty/py-etherscan-api as a learning experience.'''
 
-import collections
 import requests
 
 class Client():
@@ -16,9 +15,9 @@ class Client():
         """Sets the given query parameters."""
         self.http.params.update(kwargs)
 
-    def connect(self):
+    def connect(self, params):
         try:
-            request = self.http.get(self.url)
+            request = self.http.get(self.url, params=params)
             print(request.url)
         except requests.exceptions.ConnectionError:
             print('Connection Refused')
