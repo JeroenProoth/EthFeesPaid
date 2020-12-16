@@ -9,23 +9,29 @@ class Account(Client):
 
     def get_balance(self) -> int:
         '''Get the latest balance on address.'''
-        self.set_query_param(action='balance')
-        self.set_query_param(tag='latest')
+        params = {
+            'action': 'balance',
+            'tag': 'latest',
+        }
 
-        req = self.connect()
+        req = self.connect(params=params)
         return req['result']
 
     def get_transaction_page(self) -> list:
         '''Get the latest transactions on address'''
-        self.set_query_param(action='txlist')
-        self.set_query_param(sort='desc')
+        params = {
+            'action': 'txlist',
+            'sort': 'desc',
+        }
 
-        req = self.connect()
+        req = self.connect(params=params)
         return req['result']
 
     def get_token_balance(self, contract_address):
-        self.set_query_param(action='tokenbalance')
-        self.set_query_param(contractaddress=contract_address)
+        params = {
+            'action': 'tokenbalance',
+            'contractaddress': contract_address,
+        }
 
-        req = self.connect()
+        req = self.connect(params=params)
         return req['result']

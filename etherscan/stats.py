@@ -6,7 +6,9 @@ class Stats(Client):
         self.set_query_param(module='stats')
 
     def get_ether_last_price(self):
-        self.set_query_param(action='ethprice')
+        params = {
+            'action': 'ethprice',
+        }
 
-        req = self.connect()
+        req = self.connect(params=params)
         return req['result']
