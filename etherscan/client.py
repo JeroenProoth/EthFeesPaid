@@ -19,6 +19,7 @@ class Client():
     def connect(self):
         try:
             request = self.http.get(self.url)
+            print(request.url)
         except requests.exceptions.ConnectionError:
             print('Connection Refused')
             return

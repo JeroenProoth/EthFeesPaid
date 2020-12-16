@@ -25,7 +25,7 @@ class Account(Client):
 
     def get_token_balance(self, contract_address):
         self.set_query_param(action='tokenbalance')
-        self.set_query_param(contactaddress=contract_address)
+        self.set_query_param(contractaddress=contract_address)
 
         req = self.connect()
         return req['result']

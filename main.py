@@ -6,5 +6,5 @@ from calculator import Calculator
 if __name__ == "__main__":
     calc = Calculator(ADDRESS, API_KEY)
 
-    # print(calc.calculate_total_eth_fees())
+    print(calc.calculate_total_eth_fees())
     print(calc.account.get_token_balance(ORN_CONTRACTADDRESS))
