@@ -1,13 +1,14 @@
 from .client import Client
 
 class ApiMethods(Client):
-    '''Handles everything related to one address'''
+    '''Handles ethexplorer API calls.'''
 
     def __init__(self, api_key = 'freekey'):
         super().__init__(api_key = api_key)
 
     def get_last_block(self):
-        '''Response
+        '''
+        Response
             {
                 lastBlock:     # last scanned block number,
             }
@@ -19,7 +20,8 @@ class ApiMethods(Client):
         return req
         
     def get_token_info(self, token_address):
-        '''Reponse
+        '''
+        Reponse
             {
                 address:             # token address,
                 totalSupply:         # total token supply,
@@ -58,7 +60,12 @@ class ApiMethods(Client):
         return req
 
     def get_address_info(self, address, params = None):
-        ''' Response
+        ''' 
+        Additional Params:
+            token: show balances for specified token address only
+            showETHTotals: request total incoming and outgoing ETH values [true/false, default = false]
+
+        Response
             {
                 address: # address,
                 ETH: {   # ETH specific information
@@ -84,11 +91,6 @@ class ApiMethods(Client):
                 countTxs:    # Total count of incoming and outgoing transactions (including creation one),
             }
 
-            Additional Params:
-
-            token: show balances for specified token address only
-            showETHTotals: request total incoming and outgoing ETH values [true/false, default = false]
-
         '''
 
         api_method = 'getAddressInfo'
@@ -97,7 +99,8 @@ class ApiMethods(Client):
         return req
 
     def get_tx_info(self, tx_hash):
-        '''Response
+        '''
+        Response
             {
                 operations: [
                     {
@@ -119,3 +122,68 @@ class ApiMethods(Client):
 
         req = self.connect(api_method, address_or_txhash = tx_hash)
         return req
+
+    def get_token_history(self, address, params = None):
+        ''' 
+        Additional Params:
+            type:      show operations of specified type only ( default = transfer)
+            limit:     maximum number of operations [1 - 1000, default = 10]
+            timestamp: starting offset for operations [optional, unix timestamp]
+
+        Response
+            {
+                operations: [
+                    {
+                        timestamp:       # operation timestamp
+                        transactionHash: # transaction hash
+                        tokenInfo:       # token data (same format as token info),
+                        type:            # operation type (transfer, approve, issuance, mint, burn, etc),
+                        address:         # operation target address (if one),
+                        from:            # source address (if two addresses involved),
+                        to:              # destination address (if two addresses involved),
+                        value:           # operation value (as is, not reduced to a floating point value),
+                    },
+                    ...
+                ]
+            }
+        '''
+
+        api_method = 'getTokenHistory'
+
+        req = self.connect(api_method, address_or_txhash = address, params = params)
+        return.req
+
+
+    def get_address_history(self, address, params = None):
+        '''
+        Additional Params
+            token:     show only specified token address operations
+            type:      show operations of specified type only
+            limit:     maximum number of operations [1 - 10, default = 10]
+            timestamp: starting offset for operations [optional, unix timestamp]
+
+        Response
+            {
+                operations: [
+                    {
+                        timestamp:       # operation timestamp
+                        transactionHash: # transaction hash
+                        tokenInfo:       # token data (same format as token info),
+                        type:            # operation type (transfer, approve, issuance, mint, burn, etc),
+                        address:         # operation target address (if one),
+                        from:            # source address (if two addresses involved),
+                        to:              # destination address (if two addresses involved),
+                        value:           # operation value (as is, not reduced to a floating point value),
+                    },
+                    ...
+                ]
+            }
+        '''
+
+        api_method = 'getAddressHistory'
+
+        req = self.connect(api_method, address_or_txhash = address, params = params)
+        return req
+
+    def get_address_transactions(self, address, params = None):
+        pass
