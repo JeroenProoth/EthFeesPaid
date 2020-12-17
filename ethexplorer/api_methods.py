@@ -18,7 +18,7 @@ class ApiMethods(Client):
 
         req = self.connect(api_method)
         return req
-        
+    
     def get_token_info(self, token_address):
         '''
         Reponse
@@ -151,7 +151,7 @@ class ApiMethods(Client):
         api_method = 'getTokenHistory'
 
         req = self.connect(api_method, address_or_txhash = address, params = params)
-        return.req
+        return req
 
 
     def get_address_history(self, address, params = None):
