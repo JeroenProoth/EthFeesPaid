@@ -13,9 +13,9 @@ class Client():
         """Sets the given query parameters."""
         self.http.params.update(kwargs)
 
-    def connect(self, method, address_or_txid, params = None):
+    def connect(self, method, address_or_txhash = None, params = None):
         try:
-            request = self.http.get(self.url + method + '/' + address_or_txid, params=params)
+            request = self.http.get(self.url + method + '/' + str(address_or_txhash), params=params)
         except requests.exceptions.ConnectionError:
             print('Connection Refused')
             return
@@ -27,5 +27,5 @@ class Client():
                 if not error:
                     return data
         else:
-            print('Bad Request')
+            print('Bad Request for url: {}.'.format(request.url))
 

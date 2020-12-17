@@ -6,6 +6,57 @@ class ApiMethods(Client):
     def __init__(self, api_key = 'freekey'):
         super().__init__(api_key = api_key)
 
+    def get_last_block(self):
+        '''Response
+            {
+                lastBlock:     # last scanned block number,
+            }
+        '''
+
+        api_method = 'getLastBlock'
+
+        req = self.connect(api_method)
+        return req
+        
+    def get_token_info(self, token_address):
+        '''Reponse
+            {
+                address:             # token address,
+                totalSupply:         # total token supply,
+                name:                # token name,
+                symbol:              # token symbol,
+                decimals:            # number of significant digits,
+                price: {             # token price (false, if not available)
+                    rate:            # current rate
+                    currency:        # token price currency (USD)
+                    diff:            # 24 hours rate difference (in percent)
+                    diff7d:          # 7 days rate difference (in percent)
+                    diff30d:         # 30 days rate difference (in percent)
+                    marketCapUsd:    # market cap (USD)
+                    availableSupply: # available supply
+                    volume24h:       # 24 hours volume
+                    ts:              # last rate update timestamp
+                },
+                owner:               # token owner address,
+                countOps:            # total count of token operations
+                totalIn:             # total amount of incoming tokens
+                totalOut:            # total amount of outgoing tokens
+                transfersCount:      # total number of token operations
+                ethTransfersCount:   # total number of ethereum operations, optional
+                holdersCount:        # total numnber of token holders
+                issuancesCount:      # total count of token issuances
+                image:               # token image url, optional
+                description:         # token description, optional
+                website:             # token website url, optional
+                lastUpdated:         # last update timestamp
+            }
+        '''
+
+        api_method = 'getTokenInfo'
+
+        req = self.connect(api_method, address_or_txhash = token_address)
+        return req
+
     def get_address_info(self, address, params = None):
         ''' Response
             {
@@ -39,9 +90,10 @@ class ApiMethods(Client):
             showETHTotals: request total incoming and outgoing ETH values [true/false, default = false]
 
         '''
+
         api_method = 'getAddressInfo'
 
-        req = self.connect(api_method, address, params=params)
+        req = self.connect(api_method, address_or_txhash = address, params=params)
         return req
 
     def get_tx_info(self, tx_hash):
@@ -65,5 +117,5 @@ class ApiMethods(Client):
         
         api_method = 'getTxInfo'
 
-        req = self.connect(api_method, tx_hash)
+        req = self.connect(api_method, address_or_txhash = tx_hash)
         return req
