@@ -10,7 +10,9 @@ class Calculator():
     def __init__(self, address, api_key = ''):
         self.account = Account(address, api_key = api_key)
         self.stats = Stats(api_key = api_key)
-        self.api_methods = ApiMethods()
+
+        self.address = address
+        self.ethexplorer = ApiMethods()
 
 
     def calculate_total_eth_fees(self) -> tuple:
@@ -28,6 +30,26 @@ class Calculator():
         fee_in_usd = fee_in_eth * float(self.stats.get_ether_last_price()['ethusd'])
         
         return (fee_in_eth, fee_in_usd)
+
+    def calculate_portfolio_value(self) -> dict:
+        '''Returns a dictionary of all tokens and their value.'''
+        tokens = {}
+
+        address_info = self.ethexplorer.get_address_info(self.address)
+
+        tokens['ETH'] = [address_info['ETH']['balance'], float(self.stats.get_ether_last_price()['ethusd'])]
+
+        for tkn in address_info['tokens']:
+            if 'name' in tkn['tokenInfo']:
+                token_name = tkn['tokenInfo']['name']
+                token_amount = float(tkn['balance']) / pow(10, float(tkn['tokenInfo']['decimals']))
+                token_value = float(tkn['tokenInfo']['price']['rate'])
+
+                tokens[token_name] = [token_amount, token_value]
+
+
+
+        print(tokens)
 
 
         
