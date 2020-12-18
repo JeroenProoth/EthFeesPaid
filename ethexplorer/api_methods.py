@@ -1,18 +1,18 @@
 from .client import Client
 
 class ApiMethods(Client):
-    '''Handles ethexplorer API calls.'''
+    """Handles ethexplorer API calls."""
 
     def __init__(self, api_key = 'freekey'):
         super().__init__(api_key = api_key)
 
     def get_last_block(self):
-        '''Get last scanned block.
+        """Get last scanned block.
         Response
             {
                 lastBlock:     # last scanned block number,
             }
-        '''
+        """
 
         api_method = 'getLastBlock'
 
@@ -20,7 +20,7 @@ class ApiMethods(Client):
         return req
     
     def get_token_info(self, token_address):
-        '''Get information about token for given token_address.
+        """Get information about token for given token_address.
         Reponse
             {
                 address:             # token address,
@@ -52,7 +52,7 @@ class ApiMethods(Client):
                 website:             # token website url, optional
                 lastUpdated:         # last update timestamp
             }
-        '''
+        """
 
         api_method = 'getTokenInfo'
 
@@ -60,7 +60,7 @@ class ApiMethods(Client):
         return req
 
     def get_address_info(self, address, params = None):
-        ''' Get information about address given by address.
+        """ Get information about address given by address.
         Additional Params:
             token: show balances for specified token address only
             showETHTotals: request total incoming and outgoing ETH values [true/false, default = false]
@@ -91,7 +91,7 @@ class ApiMethods(Client):
                 countTxs:    # Total count of incoming and outgoing transactions (including creation one),
             }
 
-        '''
+        """
 
         api_method = 'getAddressInfo'
 
@@ -99,7 +99,7 @@ class ApiMethods(Client):
         return req
 
     def get_tx_info(self, tx_hash):
-        '''Get information of transaction for given tx_hash.
+        """Get information of transaction for given tx_hash.
         Response
             {
                 operations: [
@@ -116,7 +116,7 @@ class ApiMethods(Client):
                     ...
                 ]
             }
-        '''
+        """
         
         api_method = 'getTxInfo'
 
@@ -124,7 +124,7 @@ class ApiMethods(Client):
         return req
 
     def get_token_history(self, token_address, params = None):
-        '''Show last (default 10) transfers for token at token_address. 
+        """Show last (default 10) transfers for token at token_address. 
         Additional Params:
             type:      show operations of specified type only ( default = transfer)
             limit:     maximum number of operations [1 - 1000, default = 10]
@@ -146,7 +146,7 @@ class ApiMethods(Client):
                     ...
                 ]
             }
-        '''
+        """
 
         api_method = 'getTokenHistory'
 
@@ -154,7 +154,7 @@ class ApiMethods(Client):
         return req
 
     def get_address_history(self, address, params = None):
-        '''Show last transfers for given address.
+        """Show last transfers for given address.
         Additional Params
             token:     show only specified token address operations
             type:      show operations of specified type only
@@ -177,7 +177,7 @@ class ApiMethods(Client):
                     ...
                 ]
             }
-        '''
+        """
 
         api_method = 'getAddressHistory'
 
@@ -185,7 +185,7 @@ class ApiMethods(Client):
         return req
 
     def get_address_transactions(self, address, params = None):
-        '''Returns list of address transactions.
+        """Returns list of address transactions.
         Additional Params
             limit:          maximum number of operations [1 - 50, default = 10]
             timestamp:      starting offset for operations [optional, unix timestamp]
@@ -203,7 +203,7 @@ class ApiMethods(Client):
                     success:         # true if transactions was completed, false if failed
                 },
             ]
-        '''
+        """
 
         api_method = 'getAddressTransactions'
 
@@ -211,7 +211,7 @@ class ApiMethods(Client):
         return req
 
     def get_top(self, params = None):
-        '''Shows top (default 50) tokens by capitalization.
+        """Shows top (default 50) tokens by capitalization.
         Additional Params
             criteria: sort tokens by criteria [optional, trade/cap/count, trade - by trade volume, cap - by capitalization, count - by operations, default = trade]
             limit:    maximum number of tokens [optional, 1 - 50, default = 50]
@@ -226,7 +226,7 @@ class ApiMethods(Client):
                     ...
                 ]
             }
-        '''
+        """
 
         api_method = 'getTop'
 
@@ -234,7 +234,7 @@ class ApiMethods(Client):
         return req
 
     def get_top_tokens(self):
-        '''Shows top 50 of the most active tokens for the last 30 days period.
+        """Shows top 50 of the most active tokens for the last 30 days period.
         Response
             {
                 tokens: [
@@ -244,7 +244,7 @@ class ApiMethods(Client):
                     ...
                 ]
             }
-        '''
+        """
 
         api_method = 'getTopTokens'
 
@@ -252,7 +252,7 @@ class ApiMethods(Client):
         return req
 
     def top_token_holders(self, token_address, params = None):
-        '''
+        """
         Additional Params
             limit:   maximum number of holders [1 - 1000 , default = 10].
             *for freekey maximum is 100
@@ -268,7 +268,7 @@ class ApiMethods(Client):
                     ...
                 ]
             }
-        '''
+        """
 
         api_method = 'topTokenHolders'
 
@@ -276,7 +276,7 @@ class ApiMethods(Client):
         return req
 
     def get_grouped_token_history(self, token_address, params = None):
-        '''Show operations for token at given token_address.
+        """Show operations for token at given token_address.
 
         Additional Params
             period:  show operations of specified days number only [optional, 30 days if not set, max. is 90 days]
@@ -296,7 +296,7 @@ class ApiMethods(Client):
                     ...
                 ]
             }
-        '''
+        """
 
         api_method = 'getTokenHistoryGrouped'
 
@@ -304,7 +304,7 @@ class ApiMethods(Client):
         return req
 
     def get_grouped_token_price_history(self, token_address, params = None):
-        '''Get price history for the token at given token_address.
+        """Get price history for the token at given token_address.
         Additional Params
             period:  show price history of specified days number only [optional, 365 days if not set]       
 
@@ -339,7 +339,7 @@ class ApiMethods(Client):
                     ]
                 }
             }
-        '''
+        """
 
         api_method = 'getTokenPriceHistoryGrouped'
 

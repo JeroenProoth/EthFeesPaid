@@ -1,4 +1,4 @@
-''' Took https://github.com/corpetty/py-etherscan-api as a learning experience.'''
+""" Took https://github.com/corpetty/py-etherscan-api as a learning experience."""
 
 import requests
 
