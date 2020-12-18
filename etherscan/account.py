@@ -1,14 +1,14 @@
 from .client import Client
 
 class Account(Client):
-    '''Handles everything related to one address'''
+    """Handles everything related to one address"""
 
     def __init__(self, address, api_key = ''):
         super().__init__(address, api_key = api_key)
         self.set_query_param(module='account')
 
     def get_balance(self) -> int:
-        '''Get the latest balance on address.'''
+        """Get the latest balance on address."""
         params = {
             'action': 'balance',
             'tag': 'latest',
@@ -18,7 +18,7 @@ class Account(Client):
         return req['result']
 
     def get_transaction_page(self) -> list:
-        '''Get the latest transactions on address'''
+        """Get the latest transactions on address"""
         params = {
             'action': 'txlist',
             'sort': 'desc',
