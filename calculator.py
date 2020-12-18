@@ -19,11 +19,11 @@ class Calculator():
         """Calculates the total amount of fees paid in Eth"""
         tx_df = pd.DataFrame(self.account.get_transaction_page())
 
-        """Calculate the total amount of fees paid by summing over all transactions.
+        '''Calculate the total amount of fees paid by summing over all transactions.
         Fee (ETH) paid for a transation = gasPrice * gasUsed * 1e-18
 
         returns (fee(ETH) , fee(USD))
-        """
+        '''
         fee_in_eth = ((pd.to_numeric(tx_df['gasPrice']) * pd.to_numeric(tx_df['gasUsed']))
             * (1e-18)).sum()
 
@@ -32,7 +32,7 @@ class Calculator():
         return (fee_in_eth, fee_in_usd)
 
     def calculate_portfolio_value(self) -> dict:
-        '''Returns a dictionary of all tokens and their value.'''
+        """Returns a dictionary of all tokens and their value."""
         tokens = {}
 
         address_info = self.ethexplorer.get_address_info(self.address)
